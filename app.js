@@ -10,7 +10,7 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const MicrosoftStrategy = require('passport-microsoft').Strategy;
+// const MicrosoftStrategy = require('passport-microsoft').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 
 //App
@@ -82,21 +82,21 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-//Passport with Microsoft OAuth
-passport.use(new MicrosoftStrategy({
-    clientID: process.env.CLIENT_ID_MICROSOFT,
-    clientSecret: process.env.CLIENT_SECRET_MICROSOFT,
-    callbackURL: 'http://localhost:3000/auth/microsoft/secrets',
-    scope: ['user.read']
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({
-      userId: profile.id
-    }, function(err, user) {
-      return done(err, user);
-    });
-  }
-));
+// //Passport with Microsoft OAuth
+// passport.use(new MicrosoftStrategy({
+//     clientID: process.env.CLIENT_ID_MICROSOFT,
+//     clientSecret: process.env.CLIENT_SECRET_MICROSOFT,
+//     callbackURL: 'http://localhost:3000/auth/microsoft/secrets',
+//     scope: ['user.read']
+//   },
+//   function(accessToken, refreshToken, profile, done) {
+//     User.findOrCreate({
+//       userId: profile.id
+//     }, function(err, user) {
+//       return done(err, user);
+//     });
+//   }
+// ));
 
 //Getting
 app.get('/', function(req, res) {
@@ -118,16 +118,16 @@ app.get('/auth/google/secrets',
     res.redirect('/secrets');
   });
 
-//Getting Microsoft OAuth
-app.get('/auth/microsoft',
-      passport.authenticate('microsoft'));
-
-    app.get('/auth/microsoft/secrets',
-      passport.authenticate('microsoft', { failureRedirect: '/login' }),
-      function(req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('/secrets');
-      });
+// //Getting Microsoft OAuth
+// app.get('/auth/microsoft',
+//       passport.authenticate('microsoft'));
+//
+//     app.get('/auth/microsoft/secrets',
+//       passport.authenticate('microsoft', { failureRedirect: '/login' }),
+//       function(req, res) {
+//         // Successful authentication, redirect home.
+//         res.redirect('/secrets');
+//       });
 
 //Getting
 app.get('/login', function(req, res) {
