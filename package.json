@@ -1,0 +1,31 @@
+{
+  "name": "Harpocrates",
+  "version": "1.0.0",
+  "description": "a website that allows the user to share a message anonymously",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Javier Bastardo",
+  "license": "ISC",
+  "engines": {
+    "node": "14.15.3"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "md5": "^2.3.0",
+    "mongoose": "^5.12.2",
+    "mongoose-encryption": "^2.0.3",
+    "mongoose-findorcreate": "^3.0.0",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.1.0",
+    "passport-microsoft": "^0.1.0"
+  }
+}

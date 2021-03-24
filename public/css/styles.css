@@ -1,0 +1,26 @@
+
+body {
+  background-color: #E8ECEF;
+}
+
+.btn-dark {
+  background-color: #2B2B2C;
+}
+
+.centered {
+    padding-top: 12.5rem;
+    text-align: center;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0.000625rem;
+    width: 100%;
+}
+
+.secret-text {
+  text-align: center;
+  font-size: 2rem;
+  color: #ffff;
+  background-color: #000;
+}
