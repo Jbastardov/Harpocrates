@@ -9,6 +9,10 @@
   },
   "author": "Javier Bastardo",
   "license": "ISC",
+  "engines": {
+    "node": "14.15.3",
+    "npm": "7.5.4"
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
