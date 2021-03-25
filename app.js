@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
-// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // const MicrosoftStrategy = require('passport-microsoft').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 
@@ -65,21 +65,21 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-// //Passport with Google OAuth
-// passport.use(new GoogleStrategy({
-//     clientID: process.env.CLIENT_ID,
-//     clientSecret: process.env.CLIENT_SECRET,
-//     callbackURL: 'http://localhost:3000/auth/google/secrets',
-//     userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
-//   },
-//   function(accessToken, refreshToken, profile, cb) {
-//     User.findOrCreate({
-//       googleId: profile.id
-//     }, function(err, user) {
-//       return cb(err, user);
-//     });
-//   }
-// ));
+//Passport with Google OAuth
+passport.use(new GoogleStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: 'http://localhost:3000/auth/google/secrets',
+    userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({
+      googleId: profile.id
+    }, function(err, user) {
+      return cb(err, user);
+    });
+  }
+));
 
 // //Passport with Microsoft OAuth
 // passport.use(new MicrosoftStrategy({
@@ -102,20 +102,20 @@ app.get('/', function(req, res) {
   res.render('home');
 });
 
-// //Getting Google OAuth
-// app.get('/auth/google',
-//   passport.authenticate('google', {
-//     scope: ['profile']
-//   })
-// );
-// app.get('/auth/google/secrets',
-//   passport.authenticate('google', {
-//     failureRedirect: '/login'
-//   }),
-//   function(req, res) {
-//     // Successful authentication, redirect to Secrets.
-//     res.redirect('/secrets');
-//   });
+//Getting Google OAuth
+app.get('/auth/google',
+  passport.authenticate('google', {
+    scope: ['profile']
+  })
+);
+app.get('/auth/google/secrets',
+  passport.authenticate('google', {
+    failureRedirect: '/login'
+  }),
+  function(req, res) {
+    // Successful authentication, redirect to Secrets.
+    res.redirect('/secrets');
+  });
 
 // //Getting Microsoft OAuth
 // app.get('/auth/microsoft',
